@@ -21,9 +21,12 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'simplecov'
+
 gem 'httparty'
 gem 'rspotify'
 gem 'yelp', require: 'yelp'
+gem 'omniauth-oauth2', '1.3.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -6,6 +6,14 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
+
+<!-- nav bar someday -->
+<% if current_user.nil? %>
+<%= link_to "Sign In With Spotify", "/auth/spotify" %>
+<% else %>
+<%= link_to "Sign Out", logout_path, method: :delete %>
+<% end %>
+
 <body>
 
 <%= yield %>

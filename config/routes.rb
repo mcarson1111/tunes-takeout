@@ -6,4 +6,11 @@ Rails.application.routes.draw do
 
   resources :suggestions, only: [:index, :create]
 
+  post '/favorites/:suggestion_id' => 'favorites#create', as: 'favorites'
+
+  resources :sessions, :only => [:create]
+  get "/auth/:provider/callback" => "sessions#create"
+  delete "/logout" => "sessions#destroy", as: 'logout'
+
+
 end

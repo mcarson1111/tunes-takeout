@@ -6,9 +6,10 @@ require 'Music'
 class SuggestionsController < ApplicationController
 
   def index
-  #  @pairing = params["pairing"]
-  #  @food_item = params["food_item"]
-  #  @song = params["song"]
+   @pairing = params["pairing"]
+   @food_item = params["food_item"]
+   @song = params["song"]
+
     #shows form to search by keyword
     #shows top 20 suggestions, ranked by total number of favorites
     #instances of the items found
@@ -17,6 +18,8 @@ class SuggestionsController < ApplicationController
   def create
     #raise make sure the form is working first
     #if params["pairing_query"].present?
+    #@pairing...better practice, shouldn't store stuffs in the params.
+    
     params["pairing_query"] = params["food_pairing_query"]
 
     params["pairing"] = TunesTakeoutWrapper.find(params["pairing_query"])
