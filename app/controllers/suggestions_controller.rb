@@ -6,23 +6,29 @@ require 'Music'
 class SuggestionsController < ApplicationController
 
   def index
+  #  @pairing = params["pairing"]
+  #  @food_item = params["food_item"]
+  #  @song = params["song"]
     #shows form to search by keyword
     #shows top 20 suggestions, ranked by total number of favorites
+    #instances of the items found
   end
 
   def create
     #raise make sure the form is working first
-    pairing_query = params["food_pairing_query"]
+    #if params["pairing_query"].present?
+    params["pairing_query"] = params["food_pairing_query"]
 
-    pairing = TunesTakeoutWrapper.find(pairing_query)
+    params["pairing"] = TunesTakeoutWrapper.find(params["pairing_query"])
 
-    food_item = Restaurant.find(pairing.food_id)
+    params["food_item"] = Restaurant.find(params["pairing"].food_id)
 
-    song = Music.find(pairing.music_id)
+    params["song"] = Music.find(params["pairing"].music_type,params["pairing"].music_id)  #music_type
 
-    redirect_to suggestions_path
 
-  #take the keyword and go to Charles' API i guess??
+    render :index
+
+
   end
 
 

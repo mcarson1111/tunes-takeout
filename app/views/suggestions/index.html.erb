@@ -1,5 +1,5 @@
 <h1>Search suggestions by keyword: </h1>
-<%= form_tag suggestions_path do %>
+<%= form_tag do %>
     <%= label_tag :food_pairing_query %>
     <%= text_field_tag :food_pairing_query %>
     <%=submit_tag %>
@@ -7,6 +7,8 @@
 
 <%= params %>
 
-<% if pairing_query %>
-  <p>you're pairing is: <%= #{food_item} %> and <%= #{song} %> </p>
+<% if params["pairing"].present? %>
+  <p> Your pairing suggestions for <%= params["pairing_query"] %> are: </p>
+  <p> artist: <%= params["song"].name %> </p>
+  <p> food: <%= params["food_item"].name %> </p>
 <% end %>

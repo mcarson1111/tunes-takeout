@@ -5,19 +5,25 @@ require 'rspotify'
 
 class Music
 attr_reader :item_id, :name, :type, :image_url, :url
-
+#where do i put in my tokens?
 
   def initialize(data)  #data.length on data array is 20, for the keyword "banana"...i just chose [0] from the data array ...should it be an each loop here instead? Is that what they meant by the 20 favorite? :/
-    @item_id = data[0].id
-    @name = data[0].name #this is weird...do a raise and look at it
-    @type = data[0].type
-    @image_url =  data[0].images[0]["url"] #there are multiple url's in the image hash
-    @external_url = data[0].external_urls
+    @item_id = data.id
+    @name = data.name #this is weird...do a raise and look at it
+    @type = data.type
+    #@image_url =  data.images[0]["url"] #there are multiple url's in the image hash
+    @external_url = data.external_urls
 
   end
 
-  def self.find(id)
-    data = RSpotify::Artist.search("id")
+  def self.find(music_type,music_id)
+    if music_type == "track"
+      data = RSpotify::Track.find(music_id) #sometimes quotes work here, sometimes they dont....
+    elsif music_type == "album"
+      data = RSpotify::Album.find(music_id)
+    elsif music_type == "artist"
+      data = RSpotify::Artist.find(music_id)
+    end
 
     self.new(data)
   end
