@@ -15,10 +15,14 @@ class User < ActiveRecord::Base
     @user = User.find_by(uid: auth_hash[:info][:id], provider: auth_hash[:provider])
        #will give a user if it matches those two parameters
     if !@user.nil?
+      @user.name = auth_hash[:info][:display_name]
+      @user.image = auth_hash[:info][:images][0][:url]
+      @user.save
       return @user
     else
     #   no user found, do something here
-    @user = User.new(name: auth_hash[:info][:display_name], uid: auth_hash[:info][:id], provider: auth_hash[:provider])
+    @user = User.new(name: auth_hash[:info][:display_name], image: auth_hash[:info][:images][0][:url],
+uid: auth_hash[:info][:id], provider: auth_hash[:provider])
 
       if @user.save
         return @user

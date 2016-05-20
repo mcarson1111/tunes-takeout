@@ -7,12 +7,19 @@ class Music
 attr_reader :item_id, :name, :type, :image_url, :url
 #where do i put in my tokens?
 
+#PLACEHOLDER_IMG_URL = " webs"
+
   def initialize(data)  #data.length on data array is 20, for the keyword "banana"...i just chose [0] from the data array ...should it be an each loop here instead? Is that what they meant by the 20 favorite? :/
     @item_id = data.id
     @name = data.name #this is weird...do a raise and look at it
     @type = data.type
-    #@image_url =  data.images[0]["url"] #there are multiple url's in the image hash
+    @image_url =   #there are multiple url's in the image hash
+      if data.type == "track" && data.album.images.present?
+        data.album.images[0]["url"]
+      else
+        #PLACEHOLDER_IMG_URL
     @external_url = data.external_urls
+      end
 
   end
 
@@ -27,6 +34,8 @@ attr_reader :item_id, :name, :type, :image_url, :url
 
     self.new(data)
   end
+
+
 
 
   #data = RSpotify::Artist.find('1WGWUsR3u4DpQEaE8zWwcr')  #this is a specific one** make it generic based on what you get back from charles' stuff(tunestakeoutwrapper)/somehow talk to eachother

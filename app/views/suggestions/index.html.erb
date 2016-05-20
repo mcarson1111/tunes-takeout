@@ -17,12 +17,17 @@
 
 <%= params %>
 
-<% if params["pairing"].present? %>
-  <p> Your pairing suggestions for <%= params["pairing_query"] %> are: </p>
-  <p> artist: <%= params["song"].name %> </p>
-  <p> food: <%= params["food_item"].name %> </p>
+<% if @pairing.present? %>
+  <p> Your pairing suggestions for <%= @pairing_query %> are: </p>
+  <p> artist: <%= @song.name %> </p>
+  <p> food: <%= @food_item.name %> </p>
 
 
   <%# button_to "Favorite", action: favorites_path(params["pairing"].id), :controller => "favorite" %>
-  <%= link_to "Favorite", favorites_path(params["pairing"].id), method: :post %>
+  <%= link_to "Favorite", favorites_path(@pairing.id), method: :post %>
+<% end %>
+
+<h2> Top 20 Favorites </h2>
+<% @top20.each do |suggestion| %>
+  <%= render "suggestion", :music_suggestion => Music.find(suggestion.music_type, suggestion.music_id), :food_suggestion => Restaurant.find(suggestion.food_id) %>
 <% end %>

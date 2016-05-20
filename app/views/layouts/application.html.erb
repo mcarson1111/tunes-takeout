@@ -10,8 +10,10 @@
 <!-- nav bar someday -->
 <% if current_user.nil? %>
 <%= link_to "Sign In With Spotify", "/auth/spotify" %>
+<%= image_tag "spotify.jpeg" %>
 <% else %>
 <%= link_to "Sign Out", logout_path, method: :delete %>
+<%= image_tag current_user.image %>
 <% end %>
 
 <body>

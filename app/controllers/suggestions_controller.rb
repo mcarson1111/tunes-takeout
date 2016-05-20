@@ -6,10 +6,11 @@ require 'Music'
 class SuggestionsController < ApplicationController
 
   def index
-   @pairing = params["pairing"]
-   @food_item = params["food_item"]
-   @song = params["song"]
-
+    # @pairing = TunesTakeoutWrapper.find(@pairing_query)
+    # @food_item = Restaurant.find(@pairing.food_id)
+    # @song = Music.find(@pairing.music_type,@pairing.music_id)
+    #
+    @top20 = TunesTakeoutWrapper.top
     #shows form to search by keyword
     #shows top 20 suggestions, ranked by total number of favorites
     #instances of the items found
@@ -19,14 +20,18 @@ class SuggestionsController < ApplicationController
     #raise make sure the form is working first
     #if params["pairing_query"].present?
     #@pairing...better practice, shouldn't store stuffs in the params.
-    
-    params["pairing_query"] = params["food_pairing_query"]
 
-    params["pairing"] = TunesTakeoutWrapper.find(params["pairing_query"])
+    @pairing_query = params["food_pairing_query"]
+    #params["pairing_query"] = params["food_pairing_query"]
 
-    params["food_item"] = Restaurant.find(params["pairing"].food_id)
+    @pairing = TunesTakeoutWrapper.find(@pairing_query)
+    #params["pairing"] = TunesTakeoutWrapper.find(params["pairing_query"])
 
-    params["song"] = Music.find(params["pairing"].music_type,params["pairing"].music_id)  #music_type
+    @food_item = Restaurant.find(@pairing.food_id)
+    #params["food_item"] = Restaurant.find(params["pairing"].food_id)
+
+    @song = Music.find(@pairing.music_type,@pairing.music_id)
+    #params["song"] = Music.find(params["pairing"].music_type,params["pairing"].music_id)  #music_type
 
 
     render :index
