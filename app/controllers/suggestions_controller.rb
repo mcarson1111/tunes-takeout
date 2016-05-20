@@ -33,7 +33,8 @@ class SuggestionsController < ApplicationController
     @song = Music.find(@pairing.music_type,@pairing.music_id)
     #params["song"] = Music.find(params["pairing"].music_type,params["pairing"].music_id)  #music_type
 
-
+    @top20 = TunesTakeoutWrapper.top
+    
     render :index
 
 

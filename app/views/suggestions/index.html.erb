@@ -30,4 +30,5 @@
 <h2> Top 20 Favorites </h2>
 <% @top20.each do |suggestion| %>
   <%= render "suggestion", :music_suggestion => Music.find(suggestion.music_type, suggestion.music_id), :food_suggestion => Restaurant.find(suggestion.food_id) %>
+
 <% end %>

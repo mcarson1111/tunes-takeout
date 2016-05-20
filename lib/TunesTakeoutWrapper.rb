@@ -42,7 +42,7 @@ class TunesTakeoutWrapper
     end
 
     return suggestion_instances
-
+    
   end
 
 

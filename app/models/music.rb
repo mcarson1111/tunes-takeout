@@ -18,7 +18,7 @@ attr_reader :item_id, :name, :type, :image_url, :url
         data.album.images[0]["url"]
       else
         #PLACEHOLDER_IMG_URL
-    @external_url = data.external_urls
+    @url = data.external_urls.values[0]
       end
 
   end
@@ -33,6 +33,7 @@ attr_reader :item_id, :name, :type, :image_url, :url
     end
 
     self.new(data)
+  
   end
 
 
