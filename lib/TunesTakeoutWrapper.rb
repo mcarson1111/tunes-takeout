@@ -28,6 +28,17 @@ class TunesTakeoutWrapper
     return response.code
   end
 
+  def self.unfavorite(user_id, suggestion_id)
+    body_data = {"suggestion": suggestion_id}.to_json
+    response = HTTParty.delete(BASE_URL + "/v1/users/#{user_id}/favorites", body: body_data)
+    return response.code
+  end
+
+  def self.your_favorites(user_id)
+    favorites = HTTParty.get(BASE_URL + "/v1/users/#{user_id}/favorites").parsed_response
+    raise
+  end
+
   def self.top
     data = HTTParty.get(BASE_URL + "/v1/suggestions/top").parsed_response
 
@@ -42,7 +53,7 @@ class TunesTakeoutWrapper
     end
 
     return suggestion_instances
-    
+
   end
 
 

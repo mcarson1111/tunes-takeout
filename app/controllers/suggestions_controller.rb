@@ -14,6 +14,7 @@ class SuggestionsController < ApplicationController
     #shows form to search by keyword
     #shows top 20 suggestions, ranked by total number of favorites
     #instances of the items found
+
   end
 
   def create
@@ -34,7 +35,7 @@ class SuggestionsController < ApplicationController
     #params["song"] = Music.find(params["pairing"].music_type,params["pairing"].music_id)  #music_type
 
     @top20 = TunesTakeoutWrapper.top
-    
+
     render :index
 
 

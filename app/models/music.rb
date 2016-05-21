@@ -4,7 +4,7 @@ require 'rspotify'
 # A plain Ruby object that receives and models data retrieved from the Spotify API. Wraps interactions with the Spotify API by leveraging the RSpotify gem. NOTE: Data retrieved from Spotify may describe an artist, album, track, or playlist.
 
 class Music
-attr_reader :item_id, :name, :type, :image_url, :url
+attr_reader :item_id, :name, :type, :image_url, :url, :uri
 #where do i put in my tokens?
 
 #PLACEHOLDER_IMG_URL = " webs"
@@ -20,6 +20,7 @@ attr_reader :item_id, :name, :type, :image_url, :url
         #PLACEHOLDER_IMG_URL
     @url = data.external_urls.values[0]
       end
+    @uri = data.uri
 
   end
 
@@ -31,9 +32,8 @@ attr_reader :item_id, :name, :type, :image_url, :url
     elsif music_type == "artist"
       data = RSpotify::Artist.find(music_id)
     end
-
     self.new(data)
-  
+
   end
 
 
