@@ -8,12 +8,19 @@
 </head>
 
 <!-- nav bar someday -->
+
 <% if current_user.nil? %>
-<%= link_to "Sign In With Spotify", "/auth/spotify" %>
-<%= image_tag "spotify.jpeg" %>
+ <h1>Welcome, guest!</h1>
+ <%= link_to "Sign In With Spotify", "/auth/spotify" %>
+ <%= image_tag "spotify.jpeg" %>
+ <p>You'll need to log into Spotify to use this application. Click "Sign In With Spotify" above!</p>
 <% else %>
-<%= link_to "Sign Out", logout_path, method: :delete %>
-<%= image_tag current_user.image %>
+ <h1>
+ Hello, <%= link_to "#{User.find(session["user_id"]).name}", "https://open.spotify.com/user/#{User.find(session["user_id"]).uid}" %>!
+</h1>
+ <%= image_tag current_user.image %>
+
+  <%= link_to "Sign Out", logout_path, method: :delete %>
 <% end %>
 
 <body>
