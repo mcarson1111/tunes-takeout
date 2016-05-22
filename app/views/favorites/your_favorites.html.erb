@@ -1,0 +1,8 @@
+
+<% @favorites.each do |suggestion| %>
+  <%= render "suggestion", :music_suggestion => SpotifyItem.find(suggestion.music_type,suggestion.music_id), :food_suggestion => FoodItem.find(suggestion.food_id), :suggestion_id => suggestion.id %>
+<% end %>
+
+<% if @favorites.empty? %>
+  No favorites yet, why not add some?
+<% end %>

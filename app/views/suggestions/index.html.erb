@@ -23,15 +23,13 @@
   <p> Music: <%= @song.name %> </p>
   <p> Restaurant: <%= @food_item.name %> </p>
 
+  <%= link_to "Favorite", favorite_path(@pairing.id), method: :post %>
+  <%= link_to "Unfavorite", unfavorite_path(@pairing.id), method: :delete %>
 
-  <%# button_to "Favorite", action: favorites_path(params["pairing"].id), :controller => "favorite" %>
-  <%= link_to "Favorite", favorites_path(@pairing.id), method: :post %>
-
-  <%= link_to "Unfavorite", unfavorites_path(@pairing.id), method: :destroy %>
 
 <% end %>
 
 <h2> Top 20 Favorites </h2>
 <% @top20.each do |suggestion| %>
-  <%= render "suggestion", :music_suggestion => Music.find(suggestion.music_type, suggestion.music_id), :food_suggestion => Restaurant.find(suggestion.food_id), :uri_sugggestion => Music.find(suggestion.music_type, suggestion.music_id) %>
+  <%= render "suggestion", :music_suggestion => Music.find(suggestion.music_type, suggestion.music_id), :food_suggestion => Restaurant.find(suggestion.food_id), :uri_sugggestion => Music.find(suggestion.music_type, suggestion.music_id), :suggestion_id => suggestion.id %>
 <% end %>

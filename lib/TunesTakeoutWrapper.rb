@@ -19,8 +19,15 @@ class TunesTakeoutWrapper
     data = HTTParty.get(BASE_URL + "/v1/suggestions/search?query=#{item}&limit=1/").parsed_response
     data["suggestion"] = data.delete("suggestions")
     data["suggestion"] = data["suggestion"][0]
+
+    if data["suggestion"].nil?
+     return @message = "Sorry, we couldn't find a good suggestion."
+   end
+
     self.new(data)
   end
+
+
 
   def self.add_favorite(user_id, suggestion_id)
     body_data = {"suggestion": suggestion_id}.to_json
@@ -28,16 +35,33 @@ class TunesTakeoutWrapper
     return response.code
   end
 
+
+
   def self.unfavorite(user_id, suggestion_id)
     body_data = {"suggestion": suggestion_id}.to_json
     response = HTTParty.delete(BASE_URL + "/v1/users/#{user_id}/favorites", body: body_data)
     return response.code
   end
 
+
+
   def self.your_favorites(user_id)
-    favorites = HTTParty.get(BASE_URL + "/v1/users/#{user_id}/favorites").parsed_response
-    raise
+    data = HTTParty.get(BASE_URL + "/v1/users/#{user_id}/favorites").parsed_response
+
+    pairings = []
+    data["suggestions"].each do |suggestion|
+      pairings << HTTParty.get(BASE_URL + "/v1/suggestions/#{suggestion}").parsed_response
+    end
+
+    instances = []
+    pairings.each do |pairing|
+      instances << self.new(pairing)
+    end
+
+    return instances
   end
+
+
 
   def self.top
     data = HTTParty.get(BASE_URL + "/v1/suggestions/top").parsed_response

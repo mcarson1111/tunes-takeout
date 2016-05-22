@@ -43,14 +43,46 @@ class SuggestionsController < ApplicationController
 
 
   def favorites
-    #shows all suggestions favorited by the signed-in User
+    @favorites = TunesTakeoutWrapper.your_favorites(session[:user_id])
   end
+
 
   def favorite
-    #adds a suggestion into the favorite list for the signed-in User. This requires interaction with the Tunes & Takeout API.
+    user = User.find(session[:user_id])
+    user_id = user.uid
+    status_code = TunesTakeoutWrapper.add_favorite(user_id, params["suggestion_id"])
+    # status_code = TunesTakeoutWrapper.add_favorite(session[:user_id], params["suggestion_id"])
+    
+    if status_code == 201
+      @message = "Favorite sucessfully added!"
+    elsif status_code == 409
+      @message = "You've already favorited this pairing."
+    else
+      @message = "Sorry, we were unable to save your favorite at this time."
+    end
+
+    @status_code = status_code
+
   end
 
+
   def unfavorite
-    #removes a suggestion from the favorite list for the signed-in User. This requires interaction with the Tunes & Takeout API.
+    user = User.find(session[:user_id])
+    user_id = user.uid
+    suggestion_id = params["suggestion_id"]
+    status_code = TunesTakeoutWrapper.unfavorite(user_id,suggestion_id)
+
+    # status_code = TunesTakeoutWrapper.unfavorite(session[:user_id], params["suggestion_id"])
+
+    if status_code == 204
+      @message = "You've unfavorited this pairing."
+    elsif status_code == 404
+      @message = "This pairing wasn't one of your favorites."
+    elsif status_code == 400
+      @message = "Sorry, we could not unfavorite this pairing at this time."
+    end
+
+    @status_code = status_code
+
   end
 end
