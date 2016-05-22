@@ -18,7 +18,8 @@
  <h1>
  Hello, <%= link_to "#{User.find(session["user_id"]).name}", "https://open.spotify.com/user/#{User.find(session["user_id"]).uid}" %>!
 </h1>
- <%= image_tag current_user.image %>
+
+  <%= link_to image_tag(User.find(session["user_id"]).image, height: '100', width: '100'), "https://open.spotify.com/user/#{User.find(session["user_id"]).uid}" %>
 
   <%= link_to "Sign Out", logout_path, method: :delete %>
 <% end %>

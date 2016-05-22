@@ -1,6 +1,7 @@
 
 <% @favorites.each do |suggestion| %>
   <%= render "suggestion", :music_suggestion => Music.find(suggestion.music_type,suggestion.music_id), :food_suggestion => Restaurant.find(suggestion.food_id), :suggestion_id => suggestion.id %>
+    
 <% end %>
 
 <% if @favorites.empty? %>
