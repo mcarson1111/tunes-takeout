@@ -4,7 +4,7 @@ require 'TunesTakeoutWrapper'
 class FavoritesController < ApplicationController
 
   def create
-    status_code = TunesTakeoutWrapper.add_favorite(session[:user_id], @pairing.id)
+    status_code = TunesTakeoutWrapper.add_favorite(session[:user_id], params[:suggestion_id])
 
     if status_code == 201
       @message = "Favorite sucessfully added!"
@@ -21,7 +21,7 @@ class FavoritesController < ApplicationController
 
 
   def destroy
-    status_code = TunesTakeoutWrapper.unfavorite(session[:user_id], @pairing.id)
+    status_code = TunesTakeoutWrapper.unfavorite(session[:user_id], params[:suggestion_id])
     if status_code == 204
       @message = "You've unfavorited this pairing."
     elsif status_code == 404

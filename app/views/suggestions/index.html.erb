@@ -23,8 +23,9 @@
   <p> Music: <%= @song.name %> </p>
   <p> Restaurant: <%= @food_item.name %> </p>
 
-  <%= link_to "Favorite", favorite_path(@pairing.id), method: :post %>
-  <%= link_to "Unfavorite", unfavorite_path(@pairing.id), method: :delete %>
+
+  <%= link_to "Favorite", favorite_path(:suggestion_id => @pairing.id), method: :post %>
+  <%= link_to "Unfavorite", unfavorite_path(:suggestion_id => @pairing.id), method: :delete %>
 
 
 <% end %>
