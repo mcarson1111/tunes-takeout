@@ -12,7 +12,7 @@
 <% if current_user.nil? %>
  <h1>Welcome, guest!</h1>
  <%= link_to "Sign In With Spotify", "/auth/spotify" %>
- <%= image_tag "spotify.jpeg" %>
+ <%= image_tag "spotify.jpeg", height: '100', width: '100' %>
  <p>You'll need to log into Spotify to use this application. Click "Sign In With Spotify" above!</p>
 <% else %>
  <h1>

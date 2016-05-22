@@ -21,7 +21,7 @@ class TunesTakeoutWrapper
     data["suggestion"] = data["suggestion"][0]
 
     if data["suggestion"].nil?
-     return @message = "Sorry, we couldn't find a good suggestion."
+     return @message = "Sorry, no pairing suggestion. Try again."
    end
 
     self.new(data)
