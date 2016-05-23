@@ -1,12 +1,15 @@
-<nav>
-  <% if current_user %>
-    <%= link_to "Your Favorites", your_favorites_path(session[:user_id]), method: :get %>
+<header>
 
-    <%= link_to "Sign Out", logout_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign In With Spotify", "/auth/spotify" %>
-  <% end %>
-</nav>
+  <ul class="nav">
+    <% if current_user %>
+      <li><%= link_to "Your Favorites", your_favorites_path(session[:user_id]), method: :get %></li>
+
+      <li><%= link_to "Sign Out", logout_path, method: :delete %></li>
+      <% else %>
+      <li><%= link_to "Sign In With Spotify", "/auth/spotify" %></li>
+      <% end %>
+    </ul>
+</header>
 
 <% if current_user %>
   <h1>Search suggestions by keyword: </h1>

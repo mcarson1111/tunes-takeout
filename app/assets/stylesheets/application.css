@@ -3,8 +3,36 @@ body{
   background-color: rgba(22, 136, 182, 0.85);
 }
 
+.user-stuff{
+  display: inline;
+}
 
+.user-stuff image_tag{
+  border-radius: 50%;
+}
 
+header {
+	height: 130px;
+	width: 100%;
+	padding: 1% 2% 0 2%;
+}
+
+h1{
+  font-size: 18px;
+}
+
+.nav{
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+ul.nav li{
+  display: inline;
+  padding-right: 5px;
+  list-style: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 40px;
+}
 
 #suggestion-wrapper {
   border: .25rem solid white;

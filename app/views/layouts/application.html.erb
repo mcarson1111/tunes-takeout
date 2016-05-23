@@ -7,20 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 
+<div class="user-stuff">
+  <% if current_user.nil? %>
+  <%= image_tag "spotify.jpeg", height: '100', width: '100' %>
+  <h1>Welcome, guest!</h1>
+  <p>You'll need to log into Spotify to use this application. Click "Sign In With Spotify" above!</p>
+  <% else %>
 
-<% if current_user.nil? %>
- <h1>Welcome, guest!</h1>
- <%= image_tag "spotify.jpeg", height: '100', width: '100' %>
- <p>You'll need to log into Spotify to use this application. Click "Sign In With Spotify" above!</p>
-<% else %>
- <h1>
- Hello, <%= link_to "#{User.find(session["user_id"]).name}", "https://open.spotify.com/user/#{User.find(session["user_id"]).uid}" %>!
-</h1>
-
-  <%= link_to image_tag(User.find(session["user_id"]).image, height: '100', width: '100'), "https://open.spotify.com/user/#{User.find(session["user_id"]).uid}" %>
-
-
-<% end %>
+    <%= link_to image_tag(User.find(session["user_id"]).image, height: '100', width: '100'),  "https://open.spotify.com/user/#{User.find(session["user_id"]).uid}" %>
+  <h1>
+    Hello, <%= link_to "#{User.find(session["user_id"]).name}",   "https://open.spotify.com/user/#{User.find(session["user_id"]).uid}" %>!
+  </h1>
+  
+    <% end %>
+</div>
 
 <body>
 
