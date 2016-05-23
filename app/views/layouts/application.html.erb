@@ -7,11 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 
-<!-- nav bar someday -->
 
 <% if current_user.nil? %>
  <h1>Welcome, guest!</h1>
- <%= link_to "Sign In With Spotify", "/auth/spotify" %>
  <%= image_tag "spotify.jpeg", height: '100', width: '100' %>
  <p>You'll need to log into Spotify to use this application. Click "Sign In With Spotify" above!</p>
 <% else %>
@@ -21,7 +19,7 @@
 
   <%= link_to image_tag(User.find(session["user_id"]).image, height: '100', width: '100'), "https://open.spotify.com/user/#{User.find(session["user_id"]).uid}" %>
 
-  <%= link_to "Sign Out", logout_path, method: :delete %>
+
 <% end %>
 
 <body>

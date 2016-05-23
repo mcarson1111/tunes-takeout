@@ -1,8 +1,8 @@
-<div id = "suggestion-wrapper">>
+<div id = "suggestion-wrapper">
   <div id = "food-suggestion">
     food:
     <%= link_to food_suggestion.name, food_suggestion.url %>
-    <br>
+
     <%= image_tag food_suggestion.image_url %>
   </div>
 
@@ -12,13 +12,13 @@
 
     <% if music_suggestion.image_url != nil %>
       <%= image_tag music_suggestion.image_url, height: '100', width: '100' %>
-      <% else %>
+    <% else %>
       <%= image_tag("url.jpg", height: '100', width: '100') %>
-      <% end %>
+    <% end %>
       <!-- trying to get a generic image to show if no image is provided form spotify, but can't get it working bc image isn't nil, the link just doesn't work... -->
+    <br>
 
       <iframe src="https://embed.spotify.com/?uri=<%= music_suggestion.uri %>" width="300" height= "80" frameborder= "0" allowtransparency="true"></iframe>
-
 
   </div>
 
