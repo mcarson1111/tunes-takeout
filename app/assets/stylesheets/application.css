@@ -44,6 +44,17 @@ ul.nav li{
   margin-right: auto;
 }
 
+#pairing-wrapper {
+  border: .25rem solid white;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 40%;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 #food-suggestion {
   text-align: center;
@@ -55,6 +66,12 @@ ul.nav li{
   text-align: center;
   width: 49%;
   float: left;
+}
+
+span{
+  text-align: center;
+  width: 49%;
+  float: right;
 }
 
 iframe {
