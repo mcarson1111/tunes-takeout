@@ -1,3 +1,46 @@
+
+
+
+
+
+
+#suggestion-wrapper {
+  border: .25rem solid white;
+  background-color: #000045;
+  width: 50%;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#food-suggestion {
+  text-align: center;
+  width: 49%;
+  float: left;
+}
+
+#music-suggestion {
+  text-align: center;
+  width: 49%;
+  float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
