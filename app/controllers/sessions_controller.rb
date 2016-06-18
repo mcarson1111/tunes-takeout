@@ -1,36 +1,29 @@
 class SessionsController < ApplicationController
-  #skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :require_login, only: [:new, :create]
+
+  # #create signs in a user by finding the id in User model and assigning session[:user_id]
+  # use keep_cart_items
+
+  # #destroy signs out a user by destroying the sessions[:user_id]
 
   def new
-    # shows a view with OAuth sign-in link
   end
 
-  def create #accepts OAuth information from Spotify, finds or creates a User account, and sets user_id in session
-    auth_hash = request.env['omniauth.auth']
-    if auth_hash[:info][:id]
-      @user = User.find_or_create_from_omniauth(auth_hash)
-      if @user
-        session[:user_id] = @user.id
-        redirect_to suggestions_path
-      else
-        redirect_to suggestions_path, notice: "Failed to save the user"
-      end
-
+  def create
+    @user = User.log_in(params[:session][:email], params[:session][:password])
+    @cart_items = CartItem.where(session_id: session[:session_id])
+    keep_cart_items(@cart_items)
+    if @user
+      session[:user_id] = @user.id
+      redirect_to root_path
     else
-      redirect_to suggestions_path, notice: "Failed to authenticate"
+      flash.now[:danger] = 'Invalid email/password combination'
+      render 'new'
     end
-
-    #user = User.log_in(params[:email], params[:password])
-    # if user
-    #   session[:user_id] = user.id
-    #   redirect_to root_path
-    # else
-    #   render :new
-    # end
   end
 
-  def destroy #deletes user_id from session
+  def destroy
     session.delete :user_id
-    redirect_to suggestions_path
+    redirect_to root_path
   end
 end
